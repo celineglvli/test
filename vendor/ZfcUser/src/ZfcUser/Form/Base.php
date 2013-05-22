@@ -15,7 +15,7 @@ class Base extends ProvidesEventsForm
         $this->add(array(
             'name' => 'username',
             'options' => array(
-                'label' => 'Username',
+                'label' => 'Nom d\'utilisateur',
             ),
             'attributes' => array(
                 'type' => 'text'
@@ -35,7 +35,7 @@ class Base extends ProvidesEventsForm
         $this->add(array(
             'name' => 'display_name',
             'options' => array(
-                'label' => 'Display Name',
+                'label' => 'Nom d\'utilisateur',
             ),
             'attributes' => array(
                 'type' => 'text'
@@ -45,7 +45,7 @@ class Base extends ProvidesEventsForm
         $this->add(array(
             'name' => 'password',
             'options' => array(
-                'label' => 'Password',
+                'label' => 'Mot de passe',
             ),
             'attributes' => array(
                 'type' => 'password'
@@ -55,7 +55,7 @@ class Base extends ProvidesEventsForm
         $this->add(array(
             'name' => 'passwordVerify',
             'options' => array(
-                'label' => 'Password Verify',
+                'label' => 'Confirmation de mot de passe',
             ),
             'attributes' => array(
                 'type' => 'password'
@@ -67,7 +67,7 @@ class Base extends ProvidesEventsForm
                 'name' => 'captcha',
                 'type' => 'Zend\Form\Element\Captcha',
                 'options' => array(
-                    'label' => 'Please type the following text',
+                    'label' => 'Entrez le texte suivant',
                     'captcha' => $this->getRegistrationOptions()->getFormCaptchaOptions(),
                 ),
             ));
@@ -75,9 +75,10 @@ class Base extends ProvidesEventsForm
 
         $submitElement = new Element\Button('submit');
         $submitElement
-            ->setLabel('Submit')
+            ->setLabel('Envoyer')
             ->setAttributes(array(
                 'type'  => 'submit',
+                'class' => 'btn btn-primary',
             ));
 
         $this->add($submitElement, array(

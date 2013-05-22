@@ -57,12 +57,15 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+        /*'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory', // <-- add this
+        ),*/
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'fr_FR',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -92,4 +95,33 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    /*'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+            ),
+            array(
+                'label' => 'Voyages',
+                'route' => 'voyage',
+                'pages' => array(
+                    array(
+                        'label' => 'Ajouter un voyage',
+                        'route' => 'voyage',
+                        'action' => 'add',
+                    ),
+                    array(
+                        'label' => 'Modifier un voyage',
+                        'route' => 'voyage',
+                        'action' => 'edit',
+                    ),
+                    array(
+                        'label' => 'Supprimer un voyage',
+                        'route' => 'voyage',
+                        'action' => 'delete',
+                    ),
+                ),
+            ),
+        ),
+    ),*/
 );

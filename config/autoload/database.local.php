@@ -7,7 +7,7 @@ return array(
     ),
     'db' => array(
         'driver'    => 'pdo',
-        'dsn'       => 'mysql:dbname=cooltest;host=localhost',
+        'dsn'       => 'mysql:dbname=cooltravelling;host=localhost',
         'username'  => 'root',
         'password'  => '',
     ),

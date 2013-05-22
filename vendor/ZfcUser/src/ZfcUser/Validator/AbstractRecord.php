@@ -17,8 +17,8 @@ abstract class AbstractRecord extends AbstractValidator
      * @var array Message templates
      */
     protected $messageTemplates = array(
-        self::ERROR_NO_RECORD_FOUND => "No record matching the input was found",
-        self::ERROR_RECORD_FOUND    => "A record matching the input was found",
+        self::ERROR_NO_RECORD_FOUND => "Enregistrement correspondant à l'entrée n'a pas été trouvée",
+        self::ERROR_RECORD_FOUND    => "Un enregistrement correspondant à l'entrée a été trouvée",
     );
 
     /**
@@ -38,7 +38,7 @@ abstract class AbstractRecord extends AbstractValidator
     public function __construct(array $options)
     {
         if (!array_key_exists('key', $options)) {
-            throw new Exception\InvalidArgumentException('No key provided');
+            throw new Exception\InvalidArgumentException('Aucune clé fournie');
         }
 
         $this->setKey($options['key']);

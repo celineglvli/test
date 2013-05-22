@@ -11,6 +11,10 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\I18n\Translator\Translator;
+use Zend\Validator\AbstractValidator;
+use Zend\Db\Adapter\Adapter as DbAdapter;
+
 
 class Module
 {
@@ -19,6 +23,14 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        //translate validation messages
+        $translator=$e->getApplication()->getServiceManager()->get('translator');
+        $translator->addTranslationFile(
+        'phpArray',
+        './vendor/zendframework/zendframework/resources/languages/fr/Zend_Validate.php'
+
+    );
+        AbstractValidator::setDefaultTranslator($translator);
     }
 
     public function getConfig()
@@ -33,6 +45,20 @@ class Module
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
+            ),
+        );
+    }
+
+    public function getServiceConfiguration()
+    {
+        return array(
+            'factories' => array(
+                'db-adapter' => function($sm) {
+                    $config = $sm->get('config');
+                    $config = $config['db'];
+                    $dbAdapter = new DbAdapter($config);
+                    return $dbAdapter;
+                },
             ),
         );
     }

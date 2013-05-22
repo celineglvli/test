@@ -7,3 +7,5 @@ CREATE TABLE `user`
     `password`      VARCHAR(128) NOT NULL,
     `state`         SMALLINT UNSIGNED
 ) ENGINE=InnoDB CHARSET="utf8";
+
+

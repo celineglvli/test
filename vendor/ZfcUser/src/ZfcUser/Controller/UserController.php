@@ -48,7 +48,7 @@ class UserController extends AbstractActionController
      * @todo Make this dynamic / translation-friendly
      * @var string
      */
-    protected $failedLoginMessage = 'Authentication failed. Please try again.';
+    protected $failedLoginMessage = 'L\'authentification a échoué. Essayez de nouveau s\'il vous plaît .';
 
     /**
      * @var UserControllerOptionsInterface
@@ -71,6 +71,12 @@ class UserController extends AbstractActionController
      */
     public function loginAction()
     {
+        // if the user is logged in, we don't need to login :) 
+        if ($this->zfcUserAuthentication()->hasIdentity()) {
+            // redirect to the login redirect route
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+        }
+
         $request = $this->getRequest();
         $form    = $this->getLoginForm();
 

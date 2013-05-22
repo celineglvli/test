@@ -1,8 +1,8 @@
-<h1>Register</h1>
+<h1>S'inscrire</h1>
 
 <?php
 if (!$this->enableRegistration) {
-    print "Registration is disabled";
+    print "Inscription est désactivé";
     return;
 }
 $form = $this->registerForm;
@@ -30,3 +30,4 @@ $form->setAttribute('method', 'post');
         <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
     <?php endif ?>
 <?php echo $this->form()->closeTag() ?>
+Vous êtes déjà inscrite ? <a href="<?php echo $this->url('zfcuser/login') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>">Identifiez-vous!</a>

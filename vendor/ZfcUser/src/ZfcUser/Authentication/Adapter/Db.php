@@ -39,7 +39,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
             $storage = $this->getStorage()->read();
             $e->setIdentity($storage['identity'])
               ->setCode(AuthenticationResult::SUCCESS)
-              ->setMessages(array('Authentication successful.'));
+              ->setMessages(array('Authentification réussie.'));
             return;
         }
 
@@ -64,7 +64,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
 
         if (!$userObject) {
             $e->setCode(AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND)
-              ->setMessages(array('A record with the supplied identity could not be found.'));
+              ->setMessages(array('Un enregistrement de l\'identité fournie est introuvable.'));
             $this->setSatisfied(false);
             return false;
         }
@@ -73,7 +73,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
             // Don't allow user to login if state is not in allowed list
             if (!in_array($userObject->getState(), $this->getOptions()->getAllowedLoginStates())) {
                 $e->setCode(AuthenticationResult::FAILURE_UNCATEGORIZED)
-                  ->setMessages(array('A record with the supplied identity is not active.'));
+                  ->setMessages(array('Un enregistrement de l\'identité fournie n\'est pas actif.'));
                 $this->setSatisfied(false);
                 return false;
             }
@@ -84,7 +84,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         if (!$bcrypt->verify($credential,$userObject->getPassword())) {
             // Password does not match
             $e->setCode(AuthenticationResult::FAILURE_CREDENTIAL_INVALID)
-              ->setMessages(array('Supplied credential is invalid.'));
+              ->setMessages(array('Identité fournie n\'est pas valide.'));
             $this->setSatisfied(false);
             return false;
         }
@@ -98,7 +98,7 @@ class Db extends AbstractAdapter implements ServiceManagerAwareInterface
         $storage['identity'] = $e->getIdentity();
         $this->getStorage()->write($storage);
         $e->setCode(AuthenticationResult::SUCCESS)
-          ->setMessages(array('Authentication successful.'));
+          ->setMessages(array('Authentification réussie.'));
     }
 
     protected function updateUserPasswordHash($userObject, $password, $bcrypt)

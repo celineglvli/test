@@ -7,3 +7,4 @@ CREATE TABLE user
     password      VARCHAR(128) NOT NULL,
     state         SMALLINT
 );
+

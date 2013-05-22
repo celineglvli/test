@@ -1,0 +1,39 @@
+<?php
+// module/Voyage/view/voyage/voyage/index.phtml:
+
+$title = 'Mes Voyages';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('voyage', array('action'=>'add'));?>">Ajouter nouveau voyage</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Nom Voyage</th>
+    <th>Etat</th>
+    <th>Date Début</th>
+    <th>Date Fin</th>
+    <th>Utilisateur</th>
+    <th>Type</th>
+    
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($voyages as $voyage) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($voyage->nom_voyages);?></td>
+    <td><?php echo $this->escapeHtml($voyage->etat_voyages);?></td>
+    <td><?php echo $this->escapeHtml($voyage->datedebut);?></td>
+    <td><?php echo $this->escapeHtml($voyage->datefin);?></td> 
+    <td><?php echo $this->escapeHtml($voyage->user_id);?></td>
+    <td><?php echo $this->escapeHtml($voyage->type_id);?></td>
+    <td>
+        <a href="<?php echo $this->url('voyage',
+            array('action'=>'edit', 'id' => $voyage->id));?>">Modifier</a>
+        <a href="<?php echo $this->url('voyage',
+            array('action'=>'delete', 'id' => $voyage->id));?>">Supprimer</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
