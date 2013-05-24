@@ -29,9 +29,9 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($voyage->user_id);?></td>
     <td><?php echo $this->escapeHtml($voyage->type_id);?></td>
     <td>
-        <a href="<?php echo $this->url('voyage',
+        <a class="btn btn-inverse" href="<?php echo $this->url('voyage',
             array('action'=>'edit', 'id' => $voyage->id));?>">Modifier</a>
-        <a href="<?php echo $this->url('voyage',
+        <a class="btn btn-inverse" href="<?php echo $this->url('voyage',
             array('action'=>'delete', 'id' => $voyage->id));?>">Supprimer</a>
     </td>
 </tr>

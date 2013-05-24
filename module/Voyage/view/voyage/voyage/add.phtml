@@ -1,0 +1,23 @@
+<?php
+	$title = 'Ajouter nouveau voyage';
+	$this->headTitle($title);
+?>
+	<h1><?php echo $this->escapeHtml($title); ?></h1>
+	<?php
+		$form = $this->form;
+		$form->setAttribute('action', $this->url('voyage', array('action' => 'add')));
+		$form->prepare();
+
+			/*echo $this->form()->openTag($form);
+			echo $this->formHidden($form->get('id'));
+			echo $this->formRow($form->get('nom_voyages'));
+			echo $this->formSelect($form->get('etat_voyages'));
+			echo $this->formDate($form->get('datedebut'));
+			echo $this->formDate($form->get('datefin'));
+			echo $this->formHidden($form->get('user_id'));
+			echo $this->formHidden($form->get('type_id'));
+			echo $this->formSubmit($form->get('submit'));
+			echo $this->form()->closeTag();*/
+			echo $this->form()->openTag($form);
+			echo $this->formCollection($form);
+			echo $this->form()->closeTag();

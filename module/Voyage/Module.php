@@ -27,7 +27,6 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
-      // Add this method:
     public function getServiceConfig()
     {
         return array(
