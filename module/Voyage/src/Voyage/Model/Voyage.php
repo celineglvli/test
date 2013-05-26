@@ -5,8 +5,8 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-
-class Voyage implements InputFilterAwareInterface
+// implements InputFilterAwareInterface
+class Voyage
 {
     public $id;
     public $nom_voyages;
@@ -29,7 +29,12 @@ class Voyage implements InputFilterAwareInterface
         $this->type_id = (isset($data['type_id'])) ? $data['type_id'] : null;      
     }
 
-     public function setInputFilter(InputFilterInterface $inputFilter)
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    } 
+
+    /*public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
@@ -49,6 +54,14 @@ class Voyage implements InputFilterAwareInterface
             )));
 
             $inputFilter->add($factory->createInput(array(
+                'name'     => 'user_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+            
+            $inputFilter->add($factory->createInput(array(
                 'name'     => 'nom_voyages',
                 'required' => true,
                 'filters'  => array(
@@ -60,14 +73,22 @@ class Voyage implements InputFilterAwareInterface
                         'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
+                            'min'      => 5,
+                            'max'      => 255,
                         ),
                     ),
                 ),
             )));
 
-            /*$inputFilter->add($factory->createInput(array(
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'type_id',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'Int'),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
                 'name'     => 'etat_voyages',
                 'required' => true,
                 'filters'  => array(
@@ -76,19 +97,46 @@ class Voyage implements InputFilterAwareInterface
                 ),
                 'validators' => array(
                     array(
-                        'name'    => 'StringLength',
+                        'name'    => 'InArray',
                         'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
+                            'haystack' => array('En_cours','Termine','Souhait'),
+                            'messages'=> array(
+                                'notInArray' => 'Veuillez choisir l\'état de votre voyage'
+                            ),
+                        ),   
+                    ),
+                ),
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'datedebut',
+                'validators' => array(
+                    array(
+                        'name'    => 'Between',
+                        'options' => array(
+                            'min' => '1970-01-01',
+                            'max' => '2017-12-31'
                         ),
                     ),
                 ),
-            )));*/
+            )));
+
+            $inputFilter->add($factory->createInput(array(
+                'name'     => 'datefin',
+                'validators' => array(
+                    array(
+                        'name'    => 'Between',
+                        'options' => array(
+                            'min' => '1970-01-01',
+                            'max' => '2017-12-31'
+                        ),
+                    ),
+                ),
+            ))); 
 
             $this->inputFilter = $inputFilter;
         }
 
         return $this->inputFilter;
-    }
+    }*/
 }

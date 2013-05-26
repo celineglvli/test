@@ -5,6 +5,7 @@ $title = 'Mes Voyages';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
+
 <p>
     <a class="btn btn-small btn-primary" href="<?php echo $this->url('voyage', array('action'=>'add'));?>"><i class="icon-plus icon-white"></i>Ajouter nouveau voyage</a>
 </p>
@@ -15,8 +16,7 @@ $this->headTitle($title);
     <th>Etat</th>
     <th>Date Début</th>
     <th>Date Fin</th>
-    <th>Utilisateur</th>
-    <th>Type</th>
+    <!--<th>Type</th>-->
     
     <th>&nbsp;</th>
 </tr>
@@ -26,8 +26,7 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($voyage->etat_voyages);?></td>
     <td><?php echo $this->escapeHtml($voyage->datedebut);?></td>
     <td><?php echo $this->escapeHtml($voyage->datefin);?></td> 
-    <td><?php echo $this->escapeHtml($voyage->user_id);?></td>
-    <td><?php echo $this->escapeHtml($voyage->type_id);?></td>
+    <!--<td><?php //echo $this->escapeHtml($voyage->type_id);?></td>-->
     <td>
         <a class="btn btn-inverse" href="<?php echo $this->url('voyage',
             array('action'=>'edit', 'id' => $voyage->id));?>">Modifier</a>

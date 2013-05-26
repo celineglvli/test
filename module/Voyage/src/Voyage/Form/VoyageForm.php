@@ -23,44 +23,69 @@ class VoyageForm extends Form
             ),
         ));
 
-        $this->add(array(
-            'name' => 'nom_voyages',
-            'type' => 'Select',
+         $this->add(array(
+            'name' => 'etat_voyages',
+            'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Etat de votre voyage',
                 'empty_option' => 'Choisir..',
                 'value_options' => array(
-                             '0' => 'En cours',
-                             '1' => 'Terminé',
-                             '2' => 'Souhait',
+                            'En cours' => 'En cours',
+                            'Terminé' => 'Terminé',
+                            'Souhait' => 'Souhait',
                     ),
             ),
         ));
 
         $this->add(array(
+            'name' => 'type_id',
+            'type' => 'Zend\Form\Element\Select',
+            'options' => array(
+                'label' => 'Type de votre voyage',
+                'empty_option' => 'Choisir..',
+                'value_options' => array(
+                    '0' => 'Profesionnel',
+                    '1' => 'Scolaire',
+                    '2' => 'Culturel',
+                ),
+            ),
+            'attributes' => array(
+                'id' => 'typevoyage',
+            ),
+        ));
+
+        $this->add(array(
             'name' => 'datedebut',
-            'type' => 'Date',
+            'attributes' =>array(
+                'type' => 'Zend\Form\Element\Date',
+                'id' => 'date1',
+                'class' =>'datepick',
+            ),
             'options' => array(
                 'label' => 'Date Début',
+                'format' => 'd-m-Y',
             ),
         ));
 
         $this->add(array(
             'name' => 'datefin',
-            'type' => 'Date',
+            'attributes' =>array(
+                'type' => 'Zend\Form\Element\Date',
+                'id' => 'date2',
+                'class' => 'datepick'
+            ),
             'options' => array(
                 'label' => 'Date Fin',
+                'format' => 'd-m-Y',
             ),
         ));
-
+ 
         $this->add(array(
             'name' => 'user_id',
             'type' => 'Hidden',
-        ));
-
-        $this->add(array(
-            'name' => 'type_id',
-            'type' => 'Hidden',
+             'attributes' => array(
+                'id' => 'user_id',
+            ),   
         ));
 
         $this->add(array(
@@ -73,4 +98,17 @@ class VoyageForm extends Form
             ),
         ));
     }
+
+    public function populateValues($data)
+    {   
+        foreach($data as $key=>$row)
+        {
+           if (is_array(@json_decode($row))){
+                $data[$key] = new \ArrayObject(\Zend\Json\Json::decode($row), \ArrayObject::ARRAY_AS_PROPS);
+           }
+        } 
+         
+        parent::populateValues($data);
+    }
+
 }

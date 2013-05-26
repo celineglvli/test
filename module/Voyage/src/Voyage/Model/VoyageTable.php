@@ -2,6 +2,7 @@
 namespace Voyage\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 class VoyageTable
 {
@@ -12,9 +13,10 @@ class VoyageTable
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll()
+    public function fetchAll($userid)
     {
-        $resultSet = $this->tableGateway->select();
+       $resultSet = $this->tableGateway->select(array('user_id'=>$userid));
+        //$resultSet = $this->tableGateway->select();
         return $resultSet;
     }
 
@@ -29,6 +31,7 @@ class VoyageTable
         return $row;
     }
 
+
     public function saveVoyage(Voyage $voyage)
     {
         $data = array(
@@ -41,6 +44,7 @@ class VoyageTable
         );
 
         $id = (int)$voyage->id;
+        var_dump($id);
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {

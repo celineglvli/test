@@ -15,7 +15,6 @@ foreach ( $this->sections as $name=>$section ) {
     $vm = $section->getViewModel();
     $vm->setVariable('fieldSettings', (array)@$FieldSettings[$name]);
     $vm->setVariable('user', $this->user);
-
     echo $this->render($vm);
 }
 ?>

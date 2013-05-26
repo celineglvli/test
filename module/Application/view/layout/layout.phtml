@@ -13,12 +13,15 @@
                         ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
                         ->prependStylesheet($this->basePath() . '/css/style.css')
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.3.custom.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/jquery-ui-1.10.3.custom.css')
                          ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+                                    ->prependFile($this->basePath() . '/js/jquery-ui.js')
+                                    ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                                    ->prependFile($this->basePath() . '/js/jquery.min.js')?>
 
     </head>
     <body>
