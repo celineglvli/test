@@ -5,8 +5,8 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-// implements InputFilterAwareInterface
-class Voyage
+
+class Voyage implements InputFilterAwareInterface
 {
     public $id;
     public $nom_voyages;
@@ -34,7 +34,7 @@ class Voyage
         return get_object_vars($this);
     } 
 
-    /*public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
@@ -63,7 +63,6 @@ class Voyage
             
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'nom_voyages',
-                'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
@@ -99,7 +98,7 @@ class Voyage
                     array(
                         'name'    => 'InArray',
                         'options' => array(
-                            'haystack' => array('En_cours','Termine','Souhait'),
+                            'haystack' => array('En cours','Terminé','Souhait'),
                             'messages'=> array(
                                 'notInArray' => 'Veuillez choisir l\'état de votre voyage'
                             ),
@@ -132,11 +131,11 @@ class Voyage
                         ),
                     ),
                 ),
-            ))); 
+            )));
 
             $this->inputFilter = $inputFilter;
         }
 
         return $this->inputFilter;
-    }*/
+    }
 }
