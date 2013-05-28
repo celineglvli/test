@@ -6,9 +6,12 @@ return array(
         ),
     ),
     'db' => array(
-        'driver'    => 'pdo',
-        'dsn'       => 'mysql:dbname=cooltravelling;host=localhost',
-        'username'  => 'root',
-        'password'  => '',
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=cooltravelling;host=localhost',
+        'username' => 'root',
+        'password' => '',
+        'driver_options' => array(
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ),
     ),
 );

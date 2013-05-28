@@ -1,11 +1,6 @@
 <?php
 namespace Voyage;
 
-use Voyage\Model\Voyage;
-use Voyage\Model\VoyageTable;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
-
 class Module
 {
     public function getAutoloaderConfig()
@@ -31,16 +26,21 @@ class Module
     {
         return array(
             'factories' => array(
-                'Voyage\Model\VoyageTable' =>  function($sm) {
+                /*'Voyage\Model\VoyageTable' =>  function($sm) {
                     $tableGateway = $sm->get('VoyageTableGateway');
                     $table = new VoyageTable($tableGateway);
                     return $table;
-                },
+                },*/
                 'VoyageTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Voyage());
                     return new TableGateway('voyages', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Voyage\Model\VoyageTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table     = new Model\VoyageTable($dbAdapter);
+                    return $table;
                 },
             ),
         );

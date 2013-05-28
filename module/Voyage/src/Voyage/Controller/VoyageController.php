@@ -19,23 +19,26 @@ class VoyageController extends AbstractActionController
 
     public function addAction()
     {
+        
         $form = new VoyageForm();
         $form->get('submit')->setValue('Ajouter');
 
         $request = $this->getRequest();
+        
         if ($request->isPost()) {
             $voyage = new Voyage();
             //$form->setInputFilter($voyage->getInputFilter());
             $form->setData($request->getPost());
 
-            if ($form->isValid()) {
+             if ($form->isValid()) {
                 $voyage->exchangeArray($form->getData());
                 $this->getVoyageTable()->saveVoyage($voyage);
-                // Redirect to list of voyages
+ 
                 return $this->redirect()->toRoute('voyage');
             }
         }
         return array('form' => $form);
+   
     }
 
     public function editAction()
@@ -48,11 +51,7 @@ class VoyageController extends AbstractActionController
 
     public function getVoyageTable()
     {
-        if (!$this->voyageTable) {
-            $sm = $this->getServiceLocator();
-            $this->voyageTable = $sm->get('Voyage\Model\VoyageTable');
-        }
-        return $this->voyageTable;
+        return $this->getServiceLocator()->get('Voyage\Model\VoyageTable');
     }
 
     public function getUserId()

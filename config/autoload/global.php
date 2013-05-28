@@ -10,18 +10,21 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
+
 return array(
-    'db' => array(
-        'driver'         => 'Pdo',
-        'dsn'            => 'mysql:dbname=cooltravelling;host=localhost',
-        'driver_options' => array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-        ),
-    ),
     'service_manager' => array(
         'factories' => array(
-            'Zend\Db\Adapter\Adapter'
-                    => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+        ),
+    ),
+    //INFORMATIONS DE CONNEXION A LA DB
+    'db' => array(
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=cooltravelling;host=localhost',
+        'username' => 'root',
+        'password' => '',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ),
     ),
 );

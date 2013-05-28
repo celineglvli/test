@@ -4,35 +4,63 @@
 $title = 'Mes Voyages';
 $this->headTitle($title);
 ?>
+
+
+<script>
+  $(function() {
+    $("#accordion").accordion({ collapsible: true, active: false});
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+
+    $( "#toggle" ).button().click(function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  });
+  </script>
+
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <p>
     <a class="btn btn-small btn-primary" href="<?php echo $this->url('voyage', array('action'=>'add'));?>"><i class="icon-plus icon-white"></i>Ajouter nouveau voyage</a>
 </p>
 
-<table class="table">
-<tr>
-    <th>Nom Voyage</th>
-    <th>Etat</th>
-    <th>Date Début</th>
-    <th>Date Fin</th>
-    <!--<th>Type</th>-->
-    
-    <th>&nbsp;</th>
-</tr>
+<div id="accordion">
 <?php foreach ($voyages as $voyage) : ?>
-<tr>
-    <td><?php echo $this->escapeHtml($voyage->nom_voyages);?></td>
-    <td><?php echo $this->escapeHtml($voyage->etat_voyages);?></td>
-    <td><?php echo $this->escapeHtml($voyage->datedebut);?></td>
-    <td><?php echo $this->escapeHtml($voyage->datefin);?></td> 
-    <!--<td><?php //echo $this->escapeHtml($voyage->type_id);?></td>-->
-    <td>
-        <a class="btn btn-inverse" href="<?php echo $this->url('voyage',
+<h3><?php echo $this->escapeHtml($voyage->nom_voyages);?> &raquo;</h3>
+  <div>
+    <strong>Etat de votre voyage :</strong>
+    <p><?php echo $this->escapeHtml($voyage->etat_voyages);?></p>
+    <strong>Date début :</strong>
+    <p><?php echo $this->escapeHtml($voyage->datedebut);?></p>
+    <strong>Date Fin :</strong>
+    <p><?php echo $this->escapeHtml($voyage->datedebut);?></p>
+    <a class="btn" href="<?php echo $this->url('voyage',
             array('action'=>'edit', 'id' => $voyage->id));?>">Modifier</a>
-        <a class="btn btn-inverse" href="<?php echo $this->url('voyage',
+    <a class="btn" href="<?php echo $this->url('voyage',
             array('action'=>'delete', 'id' => $voyage->id));?>">Supprimer</a>
-    </td>
-</tr>
+    <div class="btn-group dropup">
+  <button class="btn">Details</button>
+  <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+   <li><a href="#">Parcours</a></li>
+    <li><a href="#>" >Transports</a></li>
+     <li><a href="#" >Activités</a></li>
+      <li><a href="#" >Valises</a></li>         
+    <!-- dropdown menu links -->
+  </ul>
+</div>
+  </div>
 <?php endforeach; ?>
-</table>
+</div>
+
